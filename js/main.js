@@ -1,0 +1,28 @@
+function init(){
+		
+		//Toolbar menu
+		var menu = require("./../js/menu.js");
+		menu.initMenu();
+
+		//If a file type is associated with our app and the file is opened, 
+		//the contents of that file will be loaded to our textarea. 
+		if(global.gui.App.argv.length > 0){
+				editor.loadFile(global.gui.App.argv[0]);
+		}
+
+		//A cool feature of for example Notepad++ is that you can select 
+		//multiple multiple lines, press tab and all those lines will will move by one tab. 
+		tabOverride.set(global.window.document.getElementsByTagName('textarea'));
+
+		//When the window is done loading, the function within will be executed. The editor file will be “required” so we can call the method 
+		//reload(). The path of the editor.js file is relative to the “index.html” file. Next, the editor (in var textEditor) will be called. 
+		//We will bind an event called input propertychange to the textarea. This means that every time we change something in the textarea, 
+		//the reload() function will be called so the new rendered HTML will be shown in the result div.
+    global.$(global.window.document).ready(function(){
+        var editor = require("./../js/editor.js");
+        var textEditor = global.$('#editor');
+        textEditor.bind('input propertychange', function() {
+            editor.reload();
+        });
+    });
+}

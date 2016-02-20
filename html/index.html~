@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Markdown Editor</title>
+    <link rel="stylesheet" type="text/css" href="../css/screen.css" media="screen" />
+    <script src="../js/jquery/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/main.js"></script>
+		<script type="text/javascript" src="../js/taboverride/taboverride.min.js"></script>
+		<script type="text/javascript">
+			//This script block adds the window variable, $ (jQuery) variable and the gui variable (the variable with which we can control the
+			//looks of the window, for example the menu bar of the webkit window) to the global variable. This is done because these variables
+			//are unavailable in a Node.js context otherwise. You can’t, for example, call window.document from a Node.js file, but when you have 
+			//assigned this variable to the global variable, you can call it like this: global.window.document.
+			global.window = window;
+			global.$ = $;
+			global.gui = require('nw.gui');
+			init();
+		</script>
+</head>
+<body>
+    <textarea name="markdown" id="editor" class="md_editor"></textarea>
+    <div class="md_result">
+			<!--This is a hidden file dialog. We want this dialog to open when the “Open” button in menu bar is clicked. -->
+			<input style="display:none;" id="openFileDialog" type="file" />
+			<!--When this button is pressed, a new file dialog will open and you can specify where you want to save the file.
+			The nwsaveas sets the default name of the file.-->
+			<input style="display:none;" type="file"  id="saveFileDialog" nwsaveas="file.md" />
+    </div>
+</body>
+</html>
